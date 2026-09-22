@@ -11,8 +11,18 @@ module adder4(
 	      input [3:0]      a,
 	      input [3:0]      b,
 	      output [4:0] result);
-   
-// add your code here -- you must use four instances of the full adder "fulladd", defined below
+
+	wire cout0;
+	wire cout1;
+	wire cout2;
+	wire cout3;
+	
+	fulladd addc0 (.x(a[0]), .y(b[0]),.cin (1'b0), .sum(result[0]), .cout(cout0));
+	fulladd addc1 (.x(a[1]), .y(b[1]),.cin (cout0), .sum(result[1]), .cout(cout1));
+	fulladd addc2 (.x(a[2]), .y(b[2]),.cin (cout1), .sum(result[2]), .cout(cout2));
+	fulladd addc3 (.x(a[3]), .y(b[3]),.cin (cout2), .sum(result[3]), .cout(cout3));
+
+	assign result[4] = cout3;
    
 endmodule
 
